@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { NgxSpinnerModule } from "ngx-spinner";
+//import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     AngularFirestoreModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    //NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
