@@ -48,3 +48,10 @@ body {
   color: #fff;
   border-bottom-color: #fff;
 }
+
+.invalid {
+  color: red;
+}
+.errors{
+  margin-bottom: 10px;
+}
