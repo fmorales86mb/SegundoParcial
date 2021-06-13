@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/01-services/auth.service';
 import { UserService } from 'src/app/01-services/user.service';
 import { Rol } from 'src/app/02-models/enums/rol-enum';
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router:Router,
     private userService:UserService,
-    //private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService
     ) {    
     this.hasAlert = false;
     this.alertMessage ="";
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
 
   async clickIngresar(){
     this.hasAlert = false;    
-    //this.spinner.show();
+    this.spinner.show();
 
     this.authService.Ingresar(this.loginData)
     .then((res) => {
@@ -61,7 +62,7 @@ export class LoginComponent implements OnInit {
       console.log(error);
     })
     .finally(()=>{
-      //this.spinner.hide();
+      this.spinner.hide();
     })      
   }
 
@@ -71,10 +72,10 @@ export class LoginComponent implements OnInit {
         this.router.navigate(["admin/home"]);
         break;
       case Rol.Estudiante:
-        this.router.navigate(["paciente/home"]);
+        this.router.navigate(["alumno/home"]);
         break;
       case Rol.Profesor:
-        this.router.navigate(["espe/home"]);
+        this.router.navigate(["profesor/home"]);
         break;
     }
   }
