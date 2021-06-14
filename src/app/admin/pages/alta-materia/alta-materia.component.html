@@ -1,0 +1,19 @@
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <!-- header -->
+    <div class="mb-auto">
+        <app-header [user]="user"></app-header>
+    </div>
+
+    <!-- main -->
+    <main class="px-3">
+    <h1>Alta Materia</h1>
+    <div *ngFor="let item of users">
+        <app-user-list [user]="item"></app-user-list>
+    </div>
+    </main>
+
+    <!-- footer -->
+    <div class="mt-auto">
+        <app-footer></app-footer>
+    </div>
+</div>

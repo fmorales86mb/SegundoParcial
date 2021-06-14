@@ -55,3 +55,7 @@ body {
 .errors{
   margin-bottom: 10px;
 }
+
+.ml-1{
+  margin-left: 1rem;
+}
