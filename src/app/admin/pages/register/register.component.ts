@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/01-services/auth.service';
@@ -7,6 +6,7 @@ import { StorageService } from 'src/app/01-services/storage.service';
 import { Rol } from 'src/app/02-models/enums/rol-enum';
 import { LoginData } from 'src/app/02-models/loginData';
 import { RegisterData } from 'src/app/02-models/registerData';
+import { User } from 'src/app/02-models/user';
 
 @Component({
   selector: 'app-register',
@@ -15,13 +15,10 @@ import { RegisterData } from 'src/app/02-models/registerData';
 })
 export class RegisterComponent implements OnInit {
 
-  tab:number;
-  srcPaciente:string;
-  srcEspecialista:string;
-  userRol:Rol;
+  user:User;
   loginData: LoginData;
   mensajeError:string;
-  user:any;
+  userRol:Rol;
 
   constructor(
     private authService:AuthService,
@@ -29,51 +26,34 @@ export class RegisterComponent implements OnInit {
     private router:Router,
     private storageService:StorageService
   ) {     
-    this.tab = 0;
-    this.srcEspecialista = "../../../../assets/doctora-03.jpg";
-    this.srcPaciente = "../../../../assets/paciente02.jpg";
+    this.userRol = Rol.Admin;
   }
 
-  ngOnInit(): void {   
+  ngOnInit(): void {
+    this.user = this.authService.GetCurrentUser();
   }
 
   async registrarUsuario(data:RegisterData){
     this.spinner.show();    
-    
+
     data.user.perfilSrc = await this.uploadPhoto(data.files[0]);
     
     this.authService.Registrarse(data.loginData, data.user)
     .then((res)=>{
       if(res.ok){
-        this.router.navigate([""]);
+        this.router.navigate(["admin/home"]);
       }
       else{
         this.mensajeError = res.error.description;
         console.log(res.error.description);
-        this.tab = 0;
       }
     })
     .catch(()=>{
       this.mensajeError = "Ocurrió un error inesperado. Vuelva a intentarlo en unos instantes.";
-      this.tab = 0;
     })
     .finally(()=>{
       this.spinner.hide();
     })
-  }
-
-  setRol(rolId:number){
-    if(rolId == 1){
-      this.userRol = Rol.Admin;
-    }
-    else if(rolId == 2){
-      this.userRol = Rol.Estudiante;
-    }
-    else if(rolId == 3){
-      this.userRol = Rol.Profesor;
-    }
-    this.mensajeError = null;
-    this.tab = 1;
   }
 
   private async uploadPhoto(file:File) {  

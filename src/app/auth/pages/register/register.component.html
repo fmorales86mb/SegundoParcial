@@ -1,4 +1,14 @@
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <!-- Spinner -->
+    <ngx-spinner 
+        bdColor = "rgba(0, 0, 0, 0.8)" 
+        size = "medium" 
+        color = "#fff" 
+        type = "ball-atom" 
+        [fullScreen] = "true">
+        <p style="color: white" > Cargando... </p>
+    </ngx-spinner>
+
     <!-- header -->
     <div class="mb-auto">
         <app-header></app-header>

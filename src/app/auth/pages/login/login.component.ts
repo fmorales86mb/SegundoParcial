@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
 
   cargarUsuario(id:number){
     if(id == 1){
-      this.loginData.email ="fmorales86mb@gmail.com";
+      this.loginData.email ="admin@user.com";
       this.loginData.pass = "123123";
     }
     else if(id ==2){
