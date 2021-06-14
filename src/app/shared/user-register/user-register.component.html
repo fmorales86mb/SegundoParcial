@@ -15,7 +15,7 @@
 
 
                     <div class="form-floating mb-2">
-                        <input type="email" class="form-control is-invalid" id="email" placeholder="email@ejemplo.com" formControlName="emailCtrl">   
+                        <input type="email" class="form-control" id="email" placeholder="email@ejemplo.com" formControlName="emailCtrl">   
                         <label for="email" class="text-dark">Email</label>
                         <div class="errors">
                             <small class="invalid" *ngIf="getEmailCtrl()?.errors?.required && getEmailCtrl()?.touched">Campo obligatorio</small>

@@ -7,7 +7,7 @@ import { Rol } from '../02-models/enums/rol-enum';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
+export class AlumnoGuard implements CanActivate {
 
   constructor(private authService:AuthService, private router:Router){}
 
@@ -15,13 +15,13 @@ export class AdminGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-    if(this.authService.GetIsAuth() && this.authService.GetCurrentUser().rol == Rol.Admin){
-      return true;
-    }
-    else{
-      this.router.navigate(["auth/login"]);
-      return false;      
-    }   
+      if(this.authService.GetIsAuth() && this.authService.GetCurrentUser().rol == Rol.Estudiante){
+        return true;
+      }
+      else{
+        this.router.navigate(["auth/login"]);
+        return false;      
+      }   
   }
   
 }
