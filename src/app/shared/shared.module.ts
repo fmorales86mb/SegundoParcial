@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmailDirective } from '../04-directives/email.directive';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     FooterComponent,
     HeaderComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    EmailDirective
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   exports: [
     FooterComponent,
     HeaderComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    EmailDirective
   ]
 })
 export class SharedModule { }

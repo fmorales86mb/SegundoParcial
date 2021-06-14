@@ -61,20 +61,10 @@ export class AuthService {
     let response:ResponseFirebase = new ResponseFirebase();
 
     await this.authDb.signInWithEmailAndPassword(loginData.email, loginData.pass)
-    .then((userCredential) => {                 
-      if(userCredential.user.emailVerified){
-        this.uid = userCredential.user.uid;
-        this.isAuth = true;
-        response.ok = true;  
-      }
-      else{
-        this.isAuth = false;           
-        response.ok = false;
-        response.error = {
-          code:"",
-          description: "Cuenta no verificada"
-        } 
-      }          
+    .then((userCredential) => {   
+      this.uid = userCredential.user.uid;
+      this.isAuth = true;
+      response.ok = true;                      
     })
     .catch((error) => {
       this.isAuth = false;
@@ -88,17 +78,7 @@ export class AuthService {
           
     if(response.ok){      
       const x = await this.userService.getItem(this.uid).toPromise();
-      if(x.data().rol != 3 || x.data().activado){
-        this.currentUser = x.data();
-      }
-      else {
-        this.isAuth = false;        
-        response.ok = false;
-        response.error = {
-          code:"",
-          description:"Usuario no habilitado. Comuniquese con la administración"
-        };
-      }
+      this.currentUser = x.data();
     }     
 
     return response;
@@ -115,7 +95,7 @@ export class AuthService {
     return this.isAuth;
   }
 
-  public GetCurrentUser():any{
+  public GetCurrentUser():User{
     return this.currentUser;
   }
 
