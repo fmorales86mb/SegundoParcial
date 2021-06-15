@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RegisterComponent } from './pages/register/register.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AltaMateriaComponent } from './pages/alta-materia/alta-materia.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,6 +19,8 @@ import { AltaMateriaComponent } from './pages/alta-materia/alta-materia.componen
   imports: [
     CommonModule,
     AdminRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     SharedModule,
     NgxSpinnerModule
   ]
