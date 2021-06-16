@@ -10,14 +10,10 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { DocentePipe } from './05-pipes/docente.pipe';
-import { EstudiantePipe } from './05-pipes/estudiante.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DocentePipe,
-    EstudiantePipe
+    AppComponent
   ],
   imports: [
     BrowserModule,
