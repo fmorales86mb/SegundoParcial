@@ -9,6 +9,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AltaMateriaComponent } from './pages/alta-materia/alta-materia.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InscripcionComponent } from './pages/inscripcion/inscripcion.component';
+import { ListadoMateriasComponent } from './pages/listado-materias/listado-materias.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { InscripcionComponent } from './pages/inscripcion/inscripcion.component'
     HomeComponent,
     RegisterComponent,
     AltaMateriaComponent,
-    InscripcionComponent
+    InscripcionComponent,
+    ListadoMateriasComponent
   ],
   imports: [
     CommonModule,

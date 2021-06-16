@@ -25,8 +25,7 @@ export class InscripcionComponent implements OnInit {
   constructor(private autService:AuthService, 
       private userService:UserService,
       private spinner: NgxSpinnerService,
-      private materiaService: MateriaService, 
-      private router:Router) { 
+      private materiaService: MateriaService) { 
     this.users=[];
     this.materias=[];
   }
