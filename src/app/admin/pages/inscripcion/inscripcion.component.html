@@ -1,0 +1,67 @@
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+    <!-- Spinner -->
+    <ngx-spinner 
+        bdColor = "rgba(0, 0, 0, 0.8)" 
+        size = "medium" 
+        color = "#fff" 
+        type = "ball-atom" 
+        [fullScreen] = "true">
+        <p style="color: white" > Cargando... </p>
+    </ngx-spinner>
+
+    <!-- header -->
+    <div class="mb-3">
+        <app-header [user]="user"></app-header>
+    </div>
+
+    <!-- main -->
+    <main class="px-3">
+    <h1 class="mb-3">Inscripción</h1>
+        <div class="row vh-60">
+
+            <!-- listado materias -->
+            <div class="col-4 bg-dark rounded">
+                <h3>Materias</h3>
+                <div class="list-scroll col vh-60">
+                    <div *ngFor="let item of materias">
+                        <app-materia-item [materia]="item.model" (click)="seleccionarMateria(item)"></app-materia-item> 
+                    </div>
+                </div>
+            </div>
+
+            <!-- formulario materia -->
+            <div class="col-4">
+                <div *ngIf="materiaSeleccionada">
+                    <h3>{{materiaSeleccionada.model.name}}</h3>
+                    <h4>Cupo: {{materiaSeleccionada.model.estudiantes.length}}/{{materiaSeleccionada.model.cupo}}</h4>
+                    <div class="text-start">
+                        <ul>
+                            <li *ngFor="let estudiante of materiaSeleccionada.model.estudiantes">
+                                {{estudiante.email}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <button class="btn btn-success w-100" (click)="guardarClick()">Guardar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- listado estudiantes -->
+            <div class="col-4 bg-dark rounded">
+                <h3>Estudiantes</h3>
+                <div class="list-scroll col vh-60">
+                    <div *ngFor="let item of users">
+                        <app-user-list [user]="item.model" (click)="seleccionarEstudiante(item)"></app-user-list> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- footer -->
+    <div class="mt-auto">
+        <app-footer></app-footer>
+    </div>
+</div>

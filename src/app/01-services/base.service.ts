@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { IdModel } from '../02-models/idModel';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class BaseService<T> {
 
     protected itemsCollection: AngularFirestoreCollection<T>;
     items: Observable<T[]>; 
-    snapshots:Observable<any[]>;   
+    snapshots:Observable<IdModel<T>[]>;   
 
     constructor(private afs: AngularFirestore) {
       
@@ -22,9 +23,15 @@ export class BaseService<T> {
 
       this.snapshots = this.itemsCollection.snapshotChanges().pipe(
         map(actions => actions.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, ...data };
+          const model:IdModel<T> = {
+            id: a.payload.doc.id,
+            model: a.payload.doc.data()
+          };
+
+          return model;
+          // const data = a.payload.doc.data();
+          // const id = a.payload.doc.id;
+          // return { id, ...data };
         })));
     }
 

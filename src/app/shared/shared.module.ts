@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmailDirective } from '../04-directives/email.directive';
 import { UserListComponent } from './user-list/user-list.component';
 import { RolPipe } from '../05-pipes/rol.pipe';
+import { MateriaItemComponent } from './materia-item/materia-item.component';
+import { CuatrimestrePipe } from '../05-pipes/cuatrimestre.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { RolPipe } from '../05-pipes/rol.pipe';
     UserRegisterComponent,
     EmailDirective,
     UserListComponent,
-    RolPipe
+    MateriaItemComponent,
+    RolPipe,
+    CuatrimestrePipe
   ],
   imports: [
     CommonModule,
@@ -30,7 +34,9 @@ import { RolPipe } from '../05-pipes/rol.pipe';
     UserRegisterComponent,
     EmailDirective,
     UserListComponent,
-    RolPipe
+    MateriaItemComponent,
+    RolPipe,
+    CuatrimestrePipe
   ]
 })
 export class SharedModule { }

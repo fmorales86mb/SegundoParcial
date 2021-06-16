@@ -77,9 +77,9 @@
             </div>
 
             <!-- listado docentes -->
-            <div class="list-scroll col vh-60 bg-dark rounded">
+            <div class="list-scroll col vh-60">
                 <div *ngFor="let item of users">
-                    <app-user-list [user]="item" (click)="setDocente(item)"></app-user-list> 
+                    <app-user-list [user]="item.model" (click)="setDocente(item)"></app-user-list> 
                 </div>
             </div>
 

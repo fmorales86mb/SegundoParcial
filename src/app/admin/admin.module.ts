@@ -8,13 +8,15 @@ import { RegisterComponent } from './pages/register/register.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AltaMateriaComponent } from './pages/alta-materia/alta-materia.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InscripcionComponent } from './pages/inscripcion/inscripcion.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     RegisterComponent,
-    AltaMateriaComponent
+    AltaMateriaComponent,
+    InscripcionComponent
   ],
   imports: [
     CommonModule,

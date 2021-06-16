@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit {
       this.loginData.pass = "123123";
     }
     else if(id ==3){
-      this.loginData.email ="fmorales@mobilecomputing.com.ar";
+      this.loginData.email ="estudiante@user.com";
       this.loginData.pass = "123123";
     }
   }

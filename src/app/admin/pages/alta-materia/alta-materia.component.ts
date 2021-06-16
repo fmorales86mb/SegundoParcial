@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/01-services/auth.service';
 import { MateriaService } from 'src/app/01-services/materia.service';
 import { UserService } from 'src/app/01-services/user.service';
 import { Rol } from 'src/app/02-models/enums/rol-enum';
+import { IdModel } from 'src/app/02-models/idModel';
 import { Materia } from 'src/app/02-models/materia';
 import { User } from 'src/app/02-models/user';
 
@@ -17,8 +18,8 @@ import { User } from 'src/app/02-models/user';
 export class AltaMateriaComponent implements OnInit {
 
   user:User;
-  users:User[];
-  docenteSeleccionado:User;
+  users:IdModel<User>[];
+  docenteSeleccionado:IdModel<User>;
   public form: FormGroup;
   docenteEmail:string;
 
@@ -41,7 +42,11 @@ export class AltaMateriaComponent implements OnInit {
     this.userService.getItemByFilter("rol", Rol.Profesor)
     .then((querySnapshot)=>{
       querySnapshot.forEach((doc) => {
-        this.users.push(doc.data())        
+        let model:IdModel<User>={
+          id:doc.id,
+          model:doc.data()
+        };
+        this.users.push(model)        
         //console.log(doc.id, " => ", doc.data());        
       });            
     })
@@ -53,25 +58,28 @@ export class AltaMateriaComponent implements OnInit {
     })
   }
 
-  setDocente(docente:User){
+  setDocente(docente:IdModel<User>){
     this.docenteSeleccionado = docente;
-    this.docenteEmail = this.docenteSeleccionado.email;
-    //console.log(docente);
+    this.docenteEmail = this.docenteSeleccionado.model.email;
   }
 
-  createMateria(){
+  async createMateria(){
     this.spinner.show();
 
     let materia:Materia = {
-      docente: this.docenteSeleccionado,
+      docente: this.docenteSeleccionado.model,
       name: this.getName().value,
       cuatrimestre: this.getCuatri().value,
       cupo: this.getCupo().value,
-      year: this.getYear().value
+      year: this.getYear().value,
+      estudiantes: []
     };
 
     this.materiaService.addItem(materia)
-    .then(()=>{
+    .then(async()=>{
+      materia.docente = null;
+      this.docenteSeleccionado.model.materias.push(materia);
+      await this.userService.setItemWithId(this.docenteSeleccionado.model, this.docenteSeleccionado.id);
       this.router.navigate(["admin/home"]);
     })
     .catch((err)=>{
