@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { IdModel } from 'src/app/02-models/idModel';
 import { Materia } from 'src/app/02-models/materia';
 
 @Component({
@@ -8,7 +9,7 @@ import { Materia } from 'src/app/02-models/materia';
 })
 export class MateriaItemComponent implements OnInit {
 
-  @Input() materia:Materia;
+  @Input() item:IdModel<Materia>;
 
   constructor() { }
 

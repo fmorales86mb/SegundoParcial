@@ -10,6 +10,7 @@ import { AltaMateriaComponent } from './pages/alta-materia/alta-materia.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InscripcionComponent } from './pages/inscripcion/inscripcion.component';
 import { ListadoMateriasComponent } from './pages/listado-materias/listado-materias.component';
+import { ListadoUsuariosComponent } from './pages/listado-usuarios/listado-usuarios.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ListadoMateriasComponent } from './pages/listado-materias/listado-mater
     RegisterComponent,
     AltaMateriaComponent,
     InscripcionComponent,
-    ListadoMateriasComponent
+    ListadoMateriasComponent,
+    ListadoUsuariosComponent
   ],
   imports: [
     CommonModule,

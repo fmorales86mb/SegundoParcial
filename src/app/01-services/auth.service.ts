@@ -23,7 +23,7 @@ export class AuthService {
     ) { 
     }
 
-  public async Registrarse(loginData: LoginData, user:any):Promise<ResponseFirebase>{
+  public async Registrarse(loginData: LoginData, user:User):Promise<ResponseFirebase>{
     let response:ResponseFirebase = new ResponseFirebase();
 
     await this.authDb.createUserWithEmailAndPassword(loginData.email, loginData.pass)
@@ -39,11 +39,12 @@ export class AuthService {
       });
 
     if(response.ok){      
-      this.authDb.currentUser.then((userFire) => {
-        userFire.sendEmailVerification();
-      })
+      // this.authDb.currentUser.then((userFire) => {
+      //   userFire.sendEmailVerification();
+      // })
       
-      console.log(user);
+      //console.log(user);
+      user.id = this.uid;
       this.userService.setItemWithId(user, this.uid)
       .then(()=>{
         console.log("ok save user");

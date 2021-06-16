@@ -19,7 +19,7 @@ export class AltaMateriaComponent implements OnInit {
 
   user:User;
   users:IdModel<User>[];
-  docenteSeleccionado:IdModel<User>;
+  docenteSeleccionado:User;
   public form: FormGroup;
   docenteEmail:string;
 
@@ -46,7 +46,7 @@ export class AltaMateriaComponent implements OnInit {
           id:doc.id,
           model:doc.data()
         };
-        this.users.push(model)        
+        this.users.push(model);  
         //console.log(doc.id, " => ", doc.data());        
       });            
     })
@@ -59,15 +59,15 @@ export class AltaMateriaComponent implements OnInit {
   }
 
   setDocente(docente:IdModel<User>){
-    this.docenteSeleccionado = docente;
-    this.docenteEmail = this.docenteSeleccionado.model.email;
+    this.docenteSeleccionado = docente.model;
+    this.docenteEmail = this.docenteSeleccionado.email;
   }
 
   async createMateria(){
     this.spinner.show();
 
     let materia:Materia = {
-      docente: this.docenteSeleccionado.model,
+      docente: this.docenteSeleccionado,
       name: this.getName().value,
       cuatrimestre: this.getCuatri().value,
       cupo: this.getCupo().value,
@@ -78,14 +78,14 @@ export class AltaMateriaComponent implements OnInit {
     this.materiaService.addItem(materia)
     .then(async()=>{
       materia.docente = null;
-      this.docenteSeleccionado.model.materias.push(materia);
-      await this.userService.setItemWithId(this.docenteSeleccionado.model, this.docenteSeleccionado.id);
       this.router.navigate(["admin/home"]);
     })
     .catch((err)=>{
       console.log(err);
     })
     .finally(()=>{
+      this.docenteSeleccionado = null;
+      this.docenteEmail = "";
       this.spinner.hide();
     })
   }

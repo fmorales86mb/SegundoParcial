@@ -5,6 +5,7 @@ import { AltaMateriaComponent } from './pages/alta-materia/alta-materia.componen
 import { HomeComponent } from './pages/home/home.component';
 import { InscripcionComponent } from './pages/inscripcion/inscripcion.component';
 import { ListadoMateriasComponent } from './pages/listado-materias/listado-materias.component';
+import { ListadoUsuariosComponent } from './pages/listado-usuarios/listado-usuarios.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path:'register', component:RegisterComponent, canActivate:[AdminGuard]},
   {path:'materia', component:AltaMateriaComponent, canActivate:[AdminGuard]},
   {path:'materias', component:ListadoMateriasComponent, canActivate:[AdminGuard]},
+  {path:'usuarios', component:ListadoUsuariosComponent, canActivate:[AdminGuard]},
   {path:'inscripcion', component:InscripcionComponent, canActivate:[AdminGuard]}
 ];
 

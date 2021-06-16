@@ -1,0 +1,55 @@
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+    <!-- Spinner -->
+    <ngx-spinner 
+        bdColor = "rgba(0, 0, 0, 0.8)" 
+        size = "medium" 
+        color = "#fff" 
+        type = "ball-atom" 
+        [fullScreen] = "true">
+        <p style="color: white" > Cargando... </p>
+    </ngx-spinner>
+
+    <!-- header -->
+    <div class="mb-auto">
+        <app-header [user]="user"></app-header>
+    </div>
+
+    <!-- main -->
+    <main class="px-3">
+    <h2 class="mb-2">Usuarios</h2>
+        <div class="row justify-content-center vh-60">
+
+            <!-- listado Usuarios -->
+            <div class="col-6 bg-dark">
+
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-info w-100" (click)="aplicarFiltro(3)">Docentes</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-info w-100" (click)="aplicarFiltro(2)">Estudiantes</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-info w-100" (click)="aplicarFiltro(1)">Administradores</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-info w-100" (click)="quitarFiltro()">Quitar Filtro</button>
+                    </div>
+                </div>                                                                
+                
+                <div class="list-scroll col vh-70 rounded">
+                    <div *ngIf="users?.length == 0">
+                        <h4 class="text-muted">No hay usuarios cargados</h4>
+                    </div>
+                    <app-user-list [items]="users"></app-user-list> 
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- footer -->
+    <div class="mt-auto">
+        <app-footer></app-footer>
+    </div>
+</div>

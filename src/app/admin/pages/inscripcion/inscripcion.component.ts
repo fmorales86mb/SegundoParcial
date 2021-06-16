@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { VirtualTimeScheduler } from 'rxjs';
 import { AuthService } from 'src/app/01-services/auth.service';
 import { MateriaService } from 'src/app/01-services/materia.service';
 import { UserService } from 'src/app/01-services/user.service';

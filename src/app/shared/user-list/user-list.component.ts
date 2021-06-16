@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IdModel } from 'src/app/02-models/idModel';
 import { User } from 'src/app/02-models/user';
 
 @Component({
@@ -8,11 +9,19 @@ import { User } from 'src/app/02-models/user';
 })
 export class UserListComponent implements OnInit {
 
-  @Input() user:User;
+  @Input() items:IdModel<User>[];
+  @Output() emitter = new EventEmitter<IdModel<User>>();
   
-  constructor() { }
+  constructor() { 
+    this.items = [];
+  }
 
   ngOnInit(): void {
+    //console.log(this.items);
+  }
+
+  seleccionarItem(item:IdModel<User>){
+    this.emitter.emit(item);
   }
 
 }

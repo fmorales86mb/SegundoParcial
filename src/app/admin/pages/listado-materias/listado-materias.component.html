@@ -11,7 +11,7 @@
     </ngx-spinner>
 
     <!-- header -->
-    <div class="mb-3">
+    <div class="mb-auto">
         <app-header [user]="user"></app-header>
     </div>
 
@@ -24,9 +24,7 @@
             <div class="col-4 bg-dark rounded">
                 <h3>Materias</h3>
                 <div class="list-scroll col vh-60">
-                    <div *ngFor="let item of materias">
-                        <app-materia-item [materia]="item.model" (click)="seleccionarMateria(item)"></app-materia-item> 
-                    </div>
+                    <app-materia-list [items]="materias" (emitter)="seleccionarMateria($event)"></app-materia-list>
                 </div>
             </div>
 
@@ -37,9 +35,7 @@
                     <div *ngIf="users?.length == 0">
                         <h4 class="text-muted">No hay Estudiantes cargados</h4>
                     </div>
-                    <div *ngFor="let item of users">
-                        <app-user-list [user]="item"></app-user-list> 
-                    </div>
+                    <app-user-list [items]="users"></app-user-list> 
                 </div>
             </div>
         </div>

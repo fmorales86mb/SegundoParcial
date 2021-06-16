@@ -11,7 +11,7 @@
     </ngx-spinner>
 
     <!-- header -->
-    <div class="mb-3">
+    <div class="mb-auto">
         <app-header [user]="user"></app-header>
     </div>
 
@@ -78,9 +78,7 @@
 
             <!-- listado docentes -->
             <div class="list-scroll col vh-60">
-                <div *ngFor="let item of users">
-                    <app-user-list [user]="item.model" (click)="setDocente(item)"></app-user-list> 
-                </div>
+                <app-user-list [items]="users" (emitter)="setDocente($event)"></app-user-list>
             </div>
 
         </div>
