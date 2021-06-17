@@ -14,5 +14,9 @@ export class MateriaService extends BaseService<Materia> {
   constructor(private fire:AngularFirestore) { 
     super(fire);
     this.setCollection("materias");
-  }            
+  }    
+  
+  getMateriasByDocente(docenteEmail:string){
+    return this.getItemByFilter("docente.email", docenteEmail);
+  }
 }

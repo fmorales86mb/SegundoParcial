@@ -15,7 +15,7 @@ export class CupoDirective {
   }
 
   private getBackgroundColor(){
-    let color:string = "#6c757d";
+    let color:string = "#6c757d"; //secondary
 
     if(this.appCupo){
       if(this.appCupo > 10 && this.appCupo <= 20){
@@ -25,8 +25,7 @@ export class CupoDirective {
         color = "blueviolet";
       }
     }
-    
-    console.log(color);
+        
     return color;
   }
 }
