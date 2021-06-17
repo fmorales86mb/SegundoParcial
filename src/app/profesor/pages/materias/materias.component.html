@@ -11,7 +11,7 @@
     </ngx-spinner>
 
     <!-- header -->
-    <div class="mb-auto">
+    <div class="mb-5">
         <app-header [user]="user"></app-header>
     </div>
 
@@ -35,10 +35,21 @@
                 </div>
             </div>
 
-            <!-- Detalle Materia -->
+            
             <div class="col-4 bg-dark rounded">
-                <h3>Detalle Materia</h3>
-                <app-materia-detalle [item]="materiaSeleccionada" [estudiantes]="estudiantesMateria"></app-materia-detalle>
+                <div class="row">
+                    <!-- Detalle Materia -->
+                    <div class="col-12">
+                        <h4>Detalle Materia</h4>
+                        <app-materia-detalle [item]="materiaSeleccionada" [estudiantes]="estudiantesMateria" (emitter)="seleccionarUsuario($event)"></app-materia-detalle>
+                    </div>
+
+                    <!-- Detalle Usuario -->
+                    <div class="col-12" *ngIf="estudianteSeleccionado">                        
+                        <h4>Detalle Estudiante</h4>
+                        <app-user-detalle [item]="estudianteSeleccionado"></app-user-detalle>
+                    </div>
+                </div>                
             </div>
         </div>
     </main>

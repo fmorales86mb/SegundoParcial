@@ -20,6 +20,7 @@ export class MateriasComponent implements OnInit {
   materias:IdModel<Materia>[];
   materiaSeleccionada:IdModel<Materia>;
   estudiantesMateria:IdModel<User>[];
+  estudianteSeleccionado:IdModel<User>;
   mensaje:Mensaje;
 
   constructor(private autService:AuthService, 
@@ -85,5 +86,10 @@ export class MateriasComponent implements OnInit {
     .finally(()=>{
       this.spinner.hide();
     });    
+  }
+
+  seleccionarUsuario(estudiante:IdModel<User>){
+    console.log(estudiante);
+    this.estudianteSeleccionado = estudiante;
   }
 }

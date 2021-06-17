@@ -1,7 +1,7 @@
 <div class="row bg-secondary rounded" *ngIf="item">
     <!-- datos Materia -->
     <div class="col-6">
-        <h3>{{item.model.name}}</h3>
+        <h3 class="mt-2">{{item.model.name}}</h3>
         <h5>{{item.model | cuatrimestre}}</h5>
         <ul class="text-start">
             <li>
@@ -19,14 +19,15 @@
     </div>
     
     <!-- Listado Estudiantes -->
-    <div class="col-12">
-        <h5>Estudiantes Inscriptos:</h5>
-        <div class="list-scroll vh-20 text-start">
-            <ol>
+    <div class="col-12 rounded" style="background-color: steelblue;">
+        <h5 class="mt-2">Estudiantes Inscriptos:</h5>
+        <div class="list-scroll text-start h-300">
+            <app-user-list [items]="estudiantes" (emitter)="seleccionarUsuario($event)"></app-user-list> 
+            <!-- <ol>
                 <li *ngFor="let estudiante of estudiantes">
                     {{estudiante.model.email}}
                 </li>
-            </ol>
+            </ol> -->
         </div>
     </div>
 </div>
