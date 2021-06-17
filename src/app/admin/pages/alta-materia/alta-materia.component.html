@@ -23,6 +23,14 @@
             <!-- formulario materia -->
             <div class="col-7">
                 <form  [formGroup]="form" (ngSubmit)="createMateria()" class="form-materia text-start">
+                    
+                    <div class="mb-2">                  
+                        <input type="file" class="form-control" (change)="fileChangeEvent($event)" aria-describedby="inputGroupFileAddon04" aria-label="Upload" formControlName="imgCtrl">                    
+                        <div class="errors">
+                            <small class="invalid" *ngIf="getImgCtrl()?.errors?.required && getImgCtrl()?.touched">Imagen requerida</small>                                
+                        </div>
+                    </div>
+
                     <div class="form-floating mb-2">
                         <input type="text" class="form-control" id="email" placeholder="Matemática 1" formControlName="nameCtrl">   
                         <label for="email" class="text-dark">Nombre</label>

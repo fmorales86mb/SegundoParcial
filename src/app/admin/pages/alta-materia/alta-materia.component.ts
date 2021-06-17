@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/01-services/auth.service';
 import { MateriaService } from 'src/app/01-services/materia.service';
+import { StorageService } from 'src/app/01-services/storage.service';
 import { UserService } from 'src/app/01-services/user.service';
 import { Rol } from 'src/app/02-models/enums/rol-enum';
 import { IdModel } from 'src/app/02-models/idModel';
@@ -22,13 +23,15 @@ export class AltaMateriaComponent implements OnInit {
   docenteSeleccionado:User;
   public form: FormGroup;
   docenteEmail:string;
+  file:File;
 
   constructor(private autService:AuthService, 
     private userService:UserService,
     private spinner: NgxSpinnerService,
     private bf:FormBuilder,
     private materiaService: MateriaService, 
-    private router:Router) { 
+    private router:Router,
+    private storageService:StorageService) { 
     this.users=[];
     this.docenteEmail = "";
   }
@@ -46,8 +49,7 @@ export class AltaMateriaComponent implements OnInit {
           id:doc.id,
           model:doc.data()
         };
-        this.users.push(model);  
-        //console.log(doc.id, " => ", doc.data());        
+        this.users.push(model);        
       });            
     })
     .catch((err)=>{
@@ -64,9 +66,10 @@ export class AltaMateriaComponent implements OnInit {
   }
 
   async createMateria(){
-    this.spinner.show();
+    this.spinner.show();  
 
     let materia:Materia = {
+      imgSrc: await this.uploadPhoto(this.file),
       docente: this.docenteSeleccionado,
       name: this.getName().value,
       cuatrimestre: this.getCuatri().value,
@@ -90,8 +93,20 @@ export class AltaMateriaComponent implements OnInit {
     })
   }
 
+  private async uploadPhoto(file:File) {  
+    const filePath = new Date().getTime() + '-perfil';  
+    const uploadTask = this.storageService.uploadFile(file, filePath);  
+
+    return await(await uploadTask).ref.getDownloadURL();     
+  }
+
+  fileChangeEvent(e){
+    this.file = e.target.files[0];
+  }
+
   initForm(){
     this.form = this.bf.group({
+      imgCtrl:['', [Validators.required]],
       nameCtrl:['', [Validators.required]],
       cuatriCtrl:['', [Validators.required]],
       cupoCtrl:['', [Validators.required, Validators.max(100), Validators.min(1), Validators.pattern("^[0-9]*$")]],
@@ -100,6 +115,7 @@ export class AltaMateriaComponent implements OnInit {
     });
   }
 
+  getImgCtrl(){return this.form.get('imgCtrl');}
   getName(){ return this.form.get('nameCtrl'); }
   getCuatri(){ return this.form.get('cuatriCtrl'); }
   getCupo(){ return this.form.get('cupoCtrl'); }

@@ -28,7 +28,7 @@
 
         <div class="row vh-60 justify-content-center">            
             <!-- listado materias -->
-            <div class="col-5 bg-dark rounded">
+            <div class="col-4 bg-dark rounded">
                 <h3>Materias</h3>
                 <div class="list-scroll col vh-60">
                     <app-materia-list [items]="materias" (emitter)="seleccionarMateria($event)"></app-materia-list>                    
@@ -36,7 +36,7 @@
             </div>
 
             <!-- Detalle Materia -->
-            <div class="col-3 bg-dark rounded">
+            <div class="col-4 bg-dark rounded">
                 <h3>Detalle Materia</h3>
                 <app-materia-detalle [item]="materiaSeleccionada"></app-materia-detalle>
             </div>

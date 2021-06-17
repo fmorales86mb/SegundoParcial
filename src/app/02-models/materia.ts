@@ -7,5 +7,6 @@ export interface Materia {
     cupo:number;
     year:number;
     docente:User;
+    imgSrc:string;
     estudiantes:User[];
 }

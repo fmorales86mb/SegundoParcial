@@ -1,9 +1,25 @@
-<div class="row" *ngIf="item">
-    <div class="col bg-secondary rounded">
-        <h4>{{item.model.name}}</h4>
-        <p>{{item.model | cuatrimestre}}</p>
-        <p>Inscriptos {{item.model.estudiantes.length}}/{{item.model.cupo}}</p>
-        <p>Docente: {{item.model.docente.email}}</p>
+<div class="row bg-secondary rounded" *ngIf="item">
+    <!-- datos Materia -->
+    <div class="col-6">
+        <h3>{{item.model.name}}</h3>
+        <h5>{{item.model | cuatrimestre}}</h5>
+        <ul class="text-start">
+            <li>
+                Inscriptos: {{item.model.estudiantes.length}}/{{item.model.cupo}}
+            </li>
+            <li>                    
+                Docente: {{item.model.docente.email}}
+            </li>
+        </ul>
+    </div>
+
+    <!-- Img -->
+    <div class="col-6">
+        <img [src]="item.model.imgSrc" class="img-fluid m-1 rounded">            
+    </div>
+    
+    <!-- Listado Estudiantes -->
+    <div class="col-12">
         <h5>Estudiantes Inscriptos:</h5>
         <div class="list-scroll vh-20 text-start">
             <ol>

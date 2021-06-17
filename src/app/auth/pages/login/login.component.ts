@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
       this.loginData.pass = "123123";
     }
     else if(id ==2){
-      this.loginData.email ="docente@user.com";
+      this.loginData.email ="docente2@user.com";
       this.loginData.pass = "123123";
     }
     else if(id ==3){
