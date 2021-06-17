@@ -14,6 +14,7 @@ import { UserItemComponent } from './user-item/user-item.component';
 import { MateriaListComponent } from './materia-list/materia-list.component';
 import { MateriaDetalleComponent } from './materia-detalle/materia-detalle.component';
 import { AlertComponent } from './alert/alert.component';
+import { CalificacionPipe } from '../05-pipes/calificacion.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { AlertComponent } from './alert/alert.component';
     //pipes
     RolPipe,
     CuatrimestrePipe,
-
+    CalificacionPipe
   ],
   imports: [
     CommonModule,
@@ -53,7 +54,8 @@ import { AlertComponent } from './alert/alert.component';
 
     //pipes
     RolPipe,
-    CuatrimestrePipe
+    CuatrimestrePipe,
+    CalificacionPipe
   ]
 })
 export class SharedModule { }
