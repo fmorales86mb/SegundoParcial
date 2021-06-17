@@ -10,7 +10,6 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { CupoDirective } from './04-directives/cupo.directive';
 
 @NgModule({
   declarations: [

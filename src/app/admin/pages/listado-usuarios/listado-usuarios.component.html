@@ -17,11 +17,19 @@
 
     <!-- main -->
     <main class="px-3">
-    <h2 class="mb-2">Usuarios</h2>
+        <h2 class="mb-3">Usuarios</h2>
+
+        <!-- Mensaje -->
+        <div class="row justify-content-center">
+            <div class="col-8" *ngIf="mensaje">                
+                <app-alert [mensaje]="mensaje"></app-alert>
+            </div>
+        </div>
+        
         <div class="row justify-content-center vh-60">
 
             <!-- listado Usuarios -->
-            <div class="col-6 bg-dark">
+            <div class="col-5 bg-dark">
 
                 <div class="row mb-2">
                     <div class="col">
@@ -42,8 +50,16 @@
                     <div *ngIf="users?.length == 0">
                         <h4 class="text-muted">No hay usuarios cargados</h4>
                     </div>
-                    <app-user-list [items]="users"></app-user-list> 
+                    <app-user-list [items]="users" (emitter)="seleccionarUsuario($event)"></app-user-list> 
                 </div>
+            </div>
+
+            <!-- detalle usuario -->
+            <div class="col-4 bg-dark">
+                <app-user-detalle [item]="usuarioSeleccionado"></app-user-detalle>
+                <button class="btn btn-danger w-100 mt-3" *ngIf="usuarioSeleccionado?.model.rol == 2" (click)="borrarEstudiante()">
+                    Borrar Estudiante
+                </button>
             </div>
         </div>
     </main>

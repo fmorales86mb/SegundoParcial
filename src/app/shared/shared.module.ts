@@ -16,6 +16,7 @@ import { MateriaDetalleComponent } from './materia-detalle/materia-detalle.compo
 import { AlertComponent } from './alert/alert.component';
 import { CalificacionPipe } from '../05-pipes/calificacion.pipe';
 import { CupoDirective } from '../04-directives/cupo.directive';
+import { UserDetalleComponent } from './user-detalle/user-detalle.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CupoDirective } from '../04-directives/cupo.directive';
     MateriaListComponent,
     MateriaDetalleComponent,
     AlertComponent,
+    UserDetalleComponent,
 
     //pipes
     RolPipe,
@@ -54,7 +56,8 @@ import { CupoDirective } from '../04-directives/cupo.directive';
     MateriaListComponent,
     MateriaDetalleComponent,
     AlertComponent,
-
+    UserDetalleComponent,
+    
     //pipes
     RolPipe,
     CuatrimestrePipe,

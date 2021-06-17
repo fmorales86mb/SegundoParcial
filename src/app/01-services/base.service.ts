@@ -63,6 +63,10 @@ export class BaseService<T> {
       return this.itemsCollection.doc(id).get();
     }
 
+    deleteItem(id:string){
+      return this.itemsCollection.doc(id).delete();
+    }
+
     setItemInSubColl(docId:string, subColl:string, item:any){
       return this.itemsCollection.doc(docId).collection(subColl).doc().set(item);
     }
