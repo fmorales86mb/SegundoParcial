@@ -78,45 +78,37 @@ export class ListadoUsuariosComponent implements OnInit {
     this.usuarioSeleccionado = usuario;    
   }
 
-  borrarEstudiante(){
+  async borrarEstudiante(){
     this.mensaje = null;    
-    //this.spinner.show();
+    this.spinner.show();
 
-    // this.deletedUserService.setItemWithId(this.usuarioSeleccionado.model, this.usuarioSeleccionado.id)
-    // .then(()=>{            
-    // })
-    // .catch((err)=>{
-    //   console.log(err);
-    // })
-    // .finally(()=>{
+    await this.deletedUserService.setItemWithId(this.usuarioSeleccionado.model, this.usuarioSeleccionado.id);
+    await this.borrarEstudianteDeMaterias();
 
-    // });
-
-    // this.userService.deleteItem(this.usuarioSeleccionado.id);
-
-    this.borrarEstudianteDeMaterias();
+    this.userService.deleteItem(this.usuarioSeleccionado.id)
+    .then(()=>{
+      this.mensaje = {
+        txt: "Se borró al estudiante de manera exitosa.",
+        tipo: TipoMje.Success
+      };  
+    })
+    .catch((err)=>{
+      this.mensaje = {
+        tipo:TipoMje.Danger,
+        txt:"Ocurrió un error inesperado, vuelva a intentarlo más tarde."
+      } 
+      console.log(err);
+    })
+    .finally(()=>{
+      this.usuarioSeleccionado = null;
+      this.spinner.hide();
+    });    
   }
 
-  private borrarEstudianteDeMaterias(){
-
-    
-    //let materias:IdModel<Materia>[];
-
-    // this.materiaService.snapshots.subscribe((items)=>{
-    //   materias = items.filter((i) => {
-    //     if(i.model.estudiantes.some((e) => {
-    //       return e.email == this.usuarioSeleccionado.model.email;
-    //     })){
-    //       return i;
-    //     }
-    //   })
-
-    //   console.log(materias);
-    //   this.spinner.hide();
-    // });
-
-    //this.materiaService.items.forEach()
-
-    console.log("TODO: borrar estudiante")
+  private async borrarEstudianteDeMaterias(){
+    const items = await this.userService.getMaterias(this.usuarioSeleccionado.id);
+    items.forEach(async (item) => {
+        await this.materiaService.delteEstudianteDeMateria(item.id, this.usuarioSeleccionado.id);
+    });    
   }
 }
