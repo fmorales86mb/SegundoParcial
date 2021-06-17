@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InscripcionComponent } from './pages/inscripcion/inscripcion.component';
 import { ListadoMateriasComponent } from './pages/listado-materias/listado-materias.component';
 import { ListadoUsuariosComponent } from './pages/listado-usuarios/listado-usuarios.component';
+import { ListadoUsuariosEliminadosComponent } from './pages/listado-usuarios-eliminados/listado-usuarios-eliminados.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ListadoUsuariosComponent } from './pages/listado-usuarios/listado-usuar
     AltaMateriaComponent,
     InscripcionComponent,
     ListadoMateriasComponent,
-    ListadoUsuariosComponent
+    ListadoUsuariosComponent,
+    ListadoUsuariosEliminadosComponent
   ],
   imports: [
     CommonModule,
