@@ -20,6 +20,13 @@
     <h1 class="mb-3">Alta Materia</h1>
         <div class="row vh-60">
 
+            <!-- Mensaje -->
+            <div class="row justify-content-center">
+                <div class="col-8" *ngIf="mensaje">                
+                    <app-alert [mensaje]="mensaje"></app-alert>
+                </div>
+            </div>
+
             <!-- formulario materia -->
             <div class="col-7">
                 <form  [formGroup]="form" (ngSubmit)="createMateria()" class="form-materia text-start">

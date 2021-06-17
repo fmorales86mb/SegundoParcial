@@ -67,12 +67,16 @@ export class BaseService<T> {
       return this.itemsCollection.doc(id).delete();
     }
 
-    setItemInSubColl(docId:string, subColl:string, item:any){
-      return this.itemsCollection.doc(docId).collection(subColl).doc().set(item);
+    protected setItemInSubColl(docId:string, subColl:string, item:IdModel<any>){
+      return this.itemsCollection.doc(docId).collection(subColl).doc(item.id).set(item.model);
     }
 
-    getSubColl(docId:string, subColl:string){
+    protected getSubColl(docId:string, subColl:string){
       return this.itemsCollection.doc(docId).collection(subColl).ref.get();
+    }
+
+    protected deleteItemOfSubColl(docId:string, subColl:string, itemId:string){
+      return this.itemsCollection.doc(docId).collection(subColl).doc(itemId).delete();
     }
 
     /*

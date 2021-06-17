@@ -38,8 +38,8 @@
             <!-- Detalle Materia -->
             <div class="col-3 bg-dark rounded">
                 <h3>Materia a inscribirse</h3>
-                <app-materia-detalle [item]="materiaSeleccionada"></app-materia-detalle>
-                <button class="btn btn-success w-100 mt-3" (click)="inscribirseClick()" *ngIf="materiaSeleccionada">Inscribirse</button>
+                <app-materia-detalle [item]="materiaSeleccionada" [estudiantes]="estudiantesMateria"></app-materia-detalle>
+                <button class="btn btn-success w-100 mt-3" (click)="inscribirseClick()" *ngIf="materiaSeleccionada" [disabled]="isEstudianteInscripto()">Inscribirse</button>
             </div>
         </div>
     </main>

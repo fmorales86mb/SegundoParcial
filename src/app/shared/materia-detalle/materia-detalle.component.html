@@ -5,7 +5,7 @@
         <h5>{{item.model | cuatrimestre}}</h5>
         <ul class="text-start">
             <li>
-                Inscriptos: {{item.model.estudiantes.length}}/{{item.model.cupo}}
+                Inscriptos: {{estudiantes.length}}/{{item.model.cupo}}
             </li>
             <li>                    
                 Docente: {{item.model.docente.email}}
@@ -23,8 +23,8 @@
         <h5>Estudiantes Inscriptos:</h5>
         <div class="list-scroll vh-20 text-start">
             <ol>
-                <li *ngFor="let estudiante of item.model.estudiantes">
-                    {{estudiante.email}}
+                <li *ngFor="let estudiante of estudiantes">
+                    {{estudiante.model.email}}
                 </li>
             </ol>
         </div>

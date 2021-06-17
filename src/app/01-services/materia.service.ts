@@ -3,36 +3,34 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Materia } from '../02-models/materia';
 import { BaseService } from './base.service';
 import { IdModel } from '../02-models/idModel';
+import { User } from '../02-models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MateriaService extends BaseService<Materia> {
 
+  private CollName:string = "materias";
+  private StudentsSubCollName:string = "estudiantes";
+
   constructor(private fire:AngularFirestore) { 
     super(fire);
-    this.setCollection("materias");
+    this.setCollection(this.CollName);
   }    
   
   getMateriasByDocente(docenteEmail:string){
     return this.getItemByFilter("docente.email", docenteEmail);
   }
 
-  // async getMateriasByEstudiante(estudianteEmail:string){
-  //   let materias:IdModel<Materia>[];
+  setEstudiante(estudiante:IdModel<User>, materiaId:string){
+    return this.setItemInSubColl(materiaId, this.StudentsSubCollName, estudiante);
+  }
 
-  //   await this.snapshots.subscribe((items)=>{
-  //     materias = items.filter((i) => {
-  //       if(i.model.estudiantes.some((e) => {
-  //         return e.email == estudianteEmail;
-  //       })){
-  //         return i;
-  //       }
-  //     })
+  getEstudiantes(materiaId:string){
+    return this.getSubColl(materiaId, this.StudentsSubCollName);
+  }
 
-  //     return materias;
-  //   });
-
-  //   return materias;
-  // }
+  delteEstudianteDeMateria(materiaId:string, estudianteId:string){
+    return this.deleteItemOfSubColl(materiaId, this.StudentsSubCollName, estudianteId);
+  }
 }

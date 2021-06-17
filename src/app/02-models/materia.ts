@@ -8,5 +8,5 @@ export interface Materia {
     year:number;
     docente:User;
     imgSrc:string;
-    estudiantes:User[];
+    //estudiantes:User[];
 }

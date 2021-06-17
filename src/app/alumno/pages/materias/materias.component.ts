@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/01-services/auth.service';
-import { MateriaService } from 'src/app/01-services/materia.service';
+import { UserService } from 'src/app/01-services/user.service';
+import { TipoMje } from 'src/app/02-models/enums/mje-enum';
 import { IdModel } from 'src/app/02-models/idModel';
 import { Materia } from 'src/app/02-models/materia';
 import { Mensaje } from 'src/app/02-models/mensaje';
@@ -19,8 +20,8 @@ export class MateriasComponent implements OnInit {
   mensaje:Mensaje;
 
   constructor(private autService:AuthService, 
-      private spinner: NgxSpinnerService,
-      private materiaService: MateriaService) {     
+      private spinner: NgxSpinnerService,      
+      private userService:UserService) {     
     this.materias=[];
   }
 
@@ -28,16 +29,26 @@ export class MateriasComponent implements OnInit {
     this.spinner.show();
     this.user = this.autService.GetCurrentUser();
 
-    this.materiaService.snapshots.subscribe((items)=>{
-      this.materias = items.filter((i) => {
-        if(i.model.estudiantes.some((e) => {
-          return e.email == this.user.email;
-        })){
-          return i;
-        }
-      })
+    this.userService.getMaterias(this.autService.GetUserId())
+    .then((items) => {
+      items.forEach((item)=>{
+        const model:IdModel<Materia>={
+          id:item.id,
+          model:<Materia>item.data()
+        };
 
-      this.spinner.hide();
+        this.materias.push(model);
+      })
     })
+    .catch((err) => {
+      this.mensaje = {
+        tipo:TipoMje.Danger,
+        txt:"Ocurrió un error inesperado, vuelva a intentarlo más tarde."
+      }
+      console.log(err);      
+    })
+    .finally(() => {
+      this.spinner.hide();
+    });
   }
 }

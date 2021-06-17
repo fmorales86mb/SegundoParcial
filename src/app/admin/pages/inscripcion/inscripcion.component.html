@@ -19,6 +19,13 @@
     <main class="px-3">
     <h1 class="mb-3">Inscripción</h1>
         <div class="row vh-60">
+            
+            <!-- Mensaje -->
+            <div class="row justify-content-center">
+                <div class="col-8" *ngIf="mensaje">                
+                    <app-alert [mensaje]="mensaje"></app-alert>
+                </div>
+            </div>
 
             <!-- listado materias -->
             <div class="col-4 bg-dark rounded">
@@ -32,16 +39,16 @@
             <div class="col-4">
                 <div *ngIf="materiaSeleccionada">
                     <h3>{{materiaSeleccionada.model.name}}</h3>
-                    <h4>Cupo: {{materiaSeleccionada.model.estudiantes.length}}/{{materiaSeleccionada.model.cupo}}</h4>
+                    <h4>Cupo: {{totalEstudiantesMateria.length}}/{{materiaSeleccionada.model.cupo}}</h4>
                     <div class="text-start">
                         <ul>
-                            <li *ngFor="let estudiante of materiaSeleccionada.model.estudiantes">
-                                {{estudiante.email}}
+                            <li *ngFor="let estudiante of totalEstudiantesMateria">
+                                {{estudiante.model.email}}
                             </li>
                         </ul>
                     </div>
                     <div>
-                        <button class="btn btn-success w-100" (click)="guardarClick()">Guardar</button>
+                        <button class="btn btn-success w-100" (click)="guardarClick()" [disabled]="nuevosEstudiantes.length == 0">Guardar</button>
                     </div>
                 </div>
             </div>

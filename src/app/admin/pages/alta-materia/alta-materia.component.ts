@@ -6,9 +6,11 @@ import { AuthService } from 'src/app/01-services/auth.service';
 import { MateriaService } from 'src/app/01-services/materia.service';
 import { StorageService } from 'src/app/01-services/storage.service';
 import { UserService } from 'src/app/01-services/user.service';
+import { TipoMje } from 'src/app/02-models/enums/mje-enum';
 import { Rol } from 'src/app/02-models/enums/rol-enum';
 import { IdModel } from 'src/app/02-models/idModel';
 import { Materia } from 'src/app/02-models/materia';
+import { Mensaje } from 'src/app/02-models/mensaje';
 import { User } from 'src/app/02-models/user';
 
 @Component({
@@ -19,8 +21,9 @@ import { User } from 'src/app/02-models/user';
 export class AltaMateriaComponent implements OnInit {
 
   user:User;
+  mensaje:Mensaje;
   users:IdModel<User>[];
-  docenteSeleccionado:User;
+  docenteSeleccionado:IdModel<User>;
   public form: FormGroup;
   docenteEmail:string;
   file:File;
@@ -37,6 +40,7 @@ export class AltaMateriaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.mensaje = null;
     this.spinner.show();
 
     this.initForm();
@@ -53,6 +57,10 @@ export class AltaMateriaComponent implements OnInit {
       });            
     })
     .catch((err)=>{
+      this.mensaje = {
+        tipo:TipoMje.Danger,
+        txt:"Ocurrió un error inesperado, vuelva a intentarlo más tarde."
+      }
       console.log(err);
     })
     .finally(()=>{
@@ -61,8 +69,8 @@ export class AltaMateriaComponent implements OnInit {
   }
 
   setDocente(docente:IdModel<User>){
-    this.docenteSeleccionado = docente.model;
-    this.docenteEmail = this.docenteSeleccionado.email;
+    this.docenteSeleccionado = docente;
+    this.docenteEmail = this.docenteSeleccionado.model.email;
   }
 
   async createMateria(){
@@ -70,20 +78,30 @@ export class AltaMateriaComponent implements OnInit {
 
     let materia:Materia = {
       imgSrc: await this.uploadPhoto(this.file),
-      docente: this.docenteSeleccionado,
+      docente: this.docenteSeleccionado.model,
       name: this.getName().value,
       cuatrimestre: this.getCuatri().value,
       cupo: this.getCupo().value,
       year: this.getYear().value,
-      estudiantes: []
     };
 
     this.materiaService.addItem(materia)
-    .then(async()=>{
+    .then(async(ref)=>{
+      const model:IdModel<Materia> = {
+        id:ref.id,
+        model:materia
+      };
+
+      await this.userService.setMateriaToUser(this.docenteSeleccionado.id, model);
+      
       materia.docente = null;
       this.router.navigate(["admin/home"]);
     })
     .catch((err)=>{
+      this.mensaje = {
+        tipo:TipoMje.Danger,
+        txt:"Ocurrió un error inesperado, vuelva a intentarlo más tarde."
+      }
       console.log(err);
     })
     .finally(()=>{
