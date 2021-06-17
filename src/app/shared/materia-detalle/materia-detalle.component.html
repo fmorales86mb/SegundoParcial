@@ -1,0 +1,16 @@
+<div class="row" *ngIf="item">
+    <div class="col bg-secondary rounded">
+        <h4>{{item.model.name}}</h4>
+        <p>{{item.model | cuatrimestre}}</p>
+        <p>Inscriptos {{item.model.estudiantes.length}}/{{item.model.cupo}}</p>
+        <p>Docente: {{item.model.docente.email}}</p>
+        <h5>Estudiantes Inscriptos:</h5>
+        <div class="list-scroll vh-20 text-start">
+            <ol>
+                <li *ngFor="let estudiante of item.model.estudiantes">
+                    {{estudiante.email}}
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

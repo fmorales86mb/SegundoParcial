@@ -1,0 +1,51 @@
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+    <!-- Spinner -->
+    <ngx-spinner 
+        bdColor = "rgba(0, 0, 0, 0.8)" 
+        size = "medium" 
+        color = "#fff" 
+        type = "ball-atom" 
+        [fullScreen] = "true">
+        <p style="color: white" > Cargando... </p>
+    </ngx-spinner>
+
+    <!-- header -->
+    <div class="mb-auto">
+        <app-header [user]="user"></app-header>
+    </div>
+
+    <!-- main -->
+    <main class="px-3">
+        <h1 class="mb-3">Inscripción</h1>
+        
+        <!-- Mensaje -->
+        <div class="row justify-content-center">
+            <div class="col-8">                
+                <app-alert [mensaje]="mensaje"></app-alert>
+            </div>
+        </div>
+
+        <div class="row vh-60 justify-content-center">            
+            <!-- listado materias -->
+            <div class="col-5 bg-dark rounded">
+                <h3>Materias</h3>
+                <div class="list-scroll col vh-60">
+                    <app-materia-list [items]="materias" (emitter)="seleccionarMateria($event)"></app-materia-list>                    
+                </div>
+            </div>
+
+            <!-- Detalle Materia -->
+            <div class="col-3 bg-dark rounded">
+                <h3>Materia a inscribirse</h3>
+                <app-materia-detalle [item]="materiaSeleccionada"></app-materia-detalle>
+                <button class="btn btn-success w-100 mt-3" (click)="inscribirseClick()" *ngIf="materiaSeleccionada">Inscribirse</button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- footer -->
+    <div class="mt-auto">
+        <app-footer></app-footer>
+    </div>
+</div>

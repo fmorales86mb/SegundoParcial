@@ -63,6 +63,14 @@ export class BaseService<T> {
       return this.itemsCollection.doc(id).get();
     }
 
+    setItemInSubColl(docId:string, subColl:string, item:any){
+      return this.itemsCollection.doc(docId).collection(subColl).doc().set(item);
+    }
+
+    getSubColl(docId:string, subColl:string){
+      return this.itemsCollection.doc(docId).collection(subColl).ref.get();
+    }
+
     /*
     < menor que
     <= menor o igual que

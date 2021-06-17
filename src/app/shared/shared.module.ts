@@ -12,6 +12,8 @@ import { MateriaItemComponent } from './materia-item/materia-item.component';
 import { CuatrimestrePipe } from '../05-pipes/cuatrimestre.pipe';
 import { UserItemComponent } from './user-item/user-item.component';
 import { MateriaListComponent } from './materia-list/materia-list.component';
+import { MateriaDetalleComponent } from './materia-detalle/materia-detalle.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +25,13 @@ import { MateriaListComponent } from './materia-list/materia-list.component';
     UserListComponent,
     MateriaItemComponent,
     MateriaListComponent,
+    MateriaDetalleComponent,
+    AlertComponent,
 
     //pipes
     RolPipe,
-    CuatrimestrePipe
+    CuatrimestrePipe,
+
   ],
   imports: [
     CommonModule,
@@ -43,7 +48,9 @@ import { MateriaListComponent } from './materia-list/materia-list.component';
     UserListComponent,
     MateriaItemComponent,
     MateriaListComponent,
-    
+    MateriaDetalleComponent,
+    AlertComponent,
+
     //pipes
     RolPipe,
     CuatrimestrePipe

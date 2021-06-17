@@ -67,3 +67,12 @@ body {
 .vh-60{
   height: 60vh;
 }
+
+.vh-20{
+  height: 20vh;
+}
+
+.list-scroll{
+	overflow-y: auto;
+  overflow-x: hidden;  
+}
