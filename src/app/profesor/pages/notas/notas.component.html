@@ -1,0 +1,54 @@
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+    <!-- Spinner -->
+    <ngx-spinner 
+        bdColor = "rgba(0, 0, 0, 0.8)" 
+        size = "medium" 
+        color = "#fff" 
+        type = "ball-atom" 
+        [fullScreen] = "true">
+        <p style="color: white" > Cargando... </p>
+    </ngx-spinner>
+
+    <!-- header -->
+    <div class="mb-5">
+        <app-header [user]="user"></app-header>
+    </div>
+
+    <!-- main -->
+    <main class="px-3">
+        <h1 class="mb-3">Mis Materias</h1>
+        
+        <!-- Mensaje -->
+        <div class="row justify-content-center">
+            <div class="col-8" *ngIf="mensaje">                
+                <app-alert [mensaje]="mensaje"></app-alert>
+            </div>
+        </div>
+
+        <div class="row vh-60 justify-content-center">            
+            <!-- listado materias -->
+            <div class="col-4 bg-dark rounded">
+                <h3>Exámenes</h3>
+                <div class="list-scroll col vh-60">
+                    <div *ngFor="let examen of examenes" >
+                        <app-examen-item [item]="examen" (click)="seleccionarExamen(examen)"></app-examen-item>                            
+                    </div>                  
+                </div>
+            </div>
+
+            
+            <div class="list-scroll col-4 vh-70 rounded">
+                <div *ngIf="estudiantesExamen?.length == 0">
+                    <h4 class="text-muted">No hay usuarios cargados</h4>
+                </div>
+                <app-user-list [items]="estudiantesExamen"></app-user-list> 
+            </div>
+        </div>
+    </main>
+    
+    <!-- footer -->
+    <div class="mt-auto">
+        <app-footer></app-footer>
+    </div>
+</div>

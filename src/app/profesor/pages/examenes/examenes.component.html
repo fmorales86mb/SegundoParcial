@@ -1,0 +1,103 @@
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+    <!-- Spinner -->
+    <ngx-spinner 
+        bdColor = "rgba(0, 0, 0, 0.8)" 
+        size = "medium" 
+        color = "#fff" 
+        type = "ball-atom" 
+        [fullScreen] = "true">
+        <p style="color: white" > Cargando... </p>
+    </ngx-spinner>
+
+    <!-- header -->
+    <div class="mb-5">
+        <app-header [user]="user"></app-header>
+    </div>
+
+    <!-- Mensaje -->
+    <div class="row justify-content-center">
+        <div class="col-8" *ngIf="mensaje">                
+            <app-alert [mensaje]="mensaje"></app-alert>
+        </div>
+    </div>
+    
+    <!-- main -->
+    <main class="px-3" *ngIf="!cargarEstudiantes">
+        <h1 class="mb-3">Mis Materias</h1>
+        
+
+
+        <div class="row vh-60 justify-content-center">            
+            <!-- listado materias -->
+            <div class="col-4 bg-dark rounded">
+                <h3>Materias</h3>
+                <div class="list-scroll col vh-60">
+                    <app-materia-list [items]="materias" (emitter)="seleccionarMateria($event)"></app-materia-list>                    
+                </div>
+            </div>
+
+            <!-- Estudiantes -->
+            <!-- <div class="col-4 bg-dark rounded">
+                <div class="row">
+                    <h3>Estudiantes</h3>
+                    <div *ngIf="estudiantesMateria?.length == 0">
+                        <h4 class="text-muted">No hay usuarios cargados</h4>
+                    </div>
+                    <app-user-list [items]="estudiantesMateria" (emitter)="seleccionarUsuario($event)"></app-user-list> 
+                </div>                
+            </div> -->
+
+            <!-- Examen -->
+            <div class="col-4 bg-dark rounded">
+                    <h3>Examen</h3>
+                    <form  [formGroup]="form" (ngSubmit)="createExamen()" class="form-materia text-start">
+                                                  
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" id="email" placeholder="Seleccionar" [(ngModel)]="materiaName" formControlName="materiaCtrl" disabled>   
+                            <label for="email" class="text-dark">Materia</label>
+                            <div class="errors">
+                                <small class="invalid" *ngIf="getMateria()?.errors?.required && getMateria()?.touched">Campo obligatorio</small>
+                            </div>  
+                        </div>        
+                        
+                        <div class="form-floating mb-2">
+                            <input type="date" class="form-control" id="email" placeholder="Seleccionar" formControlName="fechaCtrl">   
+                            <label for="email" class="text-dark">Fecha</label>
+                            <div class="errors">
+                                <small class="invalid" *ngIf="getFecha()?.errors?.required && getFecha()?.touched">Campo obligatorio</small>
+                            </div>  
+                        </div>                          
+        
+                        <!-- <div class="form-floating mb-2">
+                            <input type="text" class="form-control" id="email" placeholder="Matemática 1" formControlName="notaCtrl">   
+                            <label for="email" class="text-dark">Nota</label>
+                            <div class="errors">
+                                <small class="invalid" *ngIf="getNota()?.errors?.required && getNota()?.touched">Campo obligatorio</small>
+                                <small class="invalid" *ngIf="getNota()?.errors && !getNota()?.errors?.required && getNota()?.touched">Indicar un valor entre 1 y 10</small>
+                            </div>  
+                        </div> -->
+
+                        <!-- <div>
+                            <ul>
+                                <li *ngFor="let estudiante of estudiantesSeleccionados">{{estudiante.model.email}}</li>
+                            </ul>
+                        </div> -->
+    
+                        <div>
+                            <button class="btn btn-success w-100" [disabled]="form.invalid">Guardar examen y agregar estudiantes</button>
+                        </div>
+                    </form>
+                       
+            </div>
+        </div>
+    </main>
+    
+
+    <app-estudiantes-examen *ngIf="cargarEstudiantes" [estudiantesMateria]="estudiantesMateria" [examen]="examenCreado" (emitter)="guardarNota($event)"></app-estudiantes-examen>
+
+    <!-- footer -->
+    <div class="mt-auto">
+        <app-footer></app-footer>
+    </div>
+</div>

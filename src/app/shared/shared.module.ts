@@ -17,6 +17,8 @@ import { AlertComponent } from './alert/alert.component';
 import { CalificacionPipe } from '../05-pipes/calificacion.pipe';
 import { CupoDirective } from '../04-directives/cupo.directive';
 import { UserDetalleComponent } from './user-detalle/user-detalle.component';
+import { UserItemNotaComponent } from './user-item-nota/user-item-nota.component';
+import { ExamenItemComponent } from './examen-item/examen-item.component';
 
 @NgModule({
   declarations: [
@@ -32,11 +34,14 @@ import { UserDetalleComponent } from './user-detalle/user-detalle.component';
     MateriaDetalleComponent,
     AlertComponent,
     UserDetalleComponent,
+    UserItemNotaComponent,
+    ExamenItemComponent,
 
     //pipes
     RolPipe,
     CuatrimestrePipe,
-    CalificacionPipe
+    CalificacionPipe,    
+    
   ],
   imports: [
     CommonModule,
@@ -57,6 +62,8 @@ import { UserDetalleComponent } from './user-detalle/user-detalle.component';
     MateriaDetalleComponent,
     AlertComponent,
     UserDetalleComponent,
+    UserItemNotaComponent,
+    ExamenItemComponent,
     
     //pipes
     RolPipe,

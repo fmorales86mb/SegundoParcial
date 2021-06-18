@@ -1,0 +1,40 @@
+<main class="px-3">
+    <h1 class="mb-3">Mis Materias</h1>
+    
+    <!-- Mensaje -->
+    <div class="row justify-content-center">
+        <div class="col-8" *ngIf="mensaje">                
+            <app-alert [mensaje]="mensaje"></app-alert>
+        </div>
+    </div>
+
+    <div class="row vh-60 justify-content-center">            
+        <!-- listado materias -->
+        <div class="col-4 bg-dark rounded">
+            <div class="row">
+                <h3>Estudiantes Inscriptos</h3>
+                <div *ngIf="estudiantesMateria?.length == 0">
+                    <h4 class="text-muted">No hay estudiantes insciptos</h4>
+                </div>
+                <app-user-list [items]="estudiantesMateria" (emitter)="seleccionarUsuario($event)"></app-user-list> 
+            </div>                
+        </div>
+
+
+        <!-- Estudiantes -->
+        <div class="col-4 bg-dark rounded">
+            <div class="row">
+                <h3>Estudiantes para examen</h3>
+                <div *ngIf="estudiantesSeleccionados?.length == 0">
+                    <h4 class="text-muted">No hay estudiantes seleccionados</h4>
+                </div>
+                <div *ngFor="let estudiante of estudiantesSeleccionados">
+                    <app-user-item-nota [item]="estudiante" [examen]="examen" (emitter)="guardarNota($event)"></app-user-item-nota> 
+                </div>
+                
+            </div>                
+        </div>
+
+        
+    </div>
+</main>

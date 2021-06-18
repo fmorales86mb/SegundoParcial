@@ -53,7 +53,8 @@ export class UserRegisterComponent implements OnInit {
       this.user = {
         rol:this.userRol,
         perfilSrc: "",
-        email:this.loginData.email
+        email:this.loginData.email,
+        nota:null
       };  
   }
 

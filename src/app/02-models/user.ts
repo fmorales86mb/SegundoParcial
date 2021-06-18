@@ -6,4 +6,5 @@ export interface User{
     email:string;
     perfilSrc:string;
     rol:Rol;
+    nota:number;
 }
